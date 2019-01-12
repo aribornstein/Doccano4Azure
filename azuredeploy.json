@@ -32,11 +32,11 @@
     },
     {
       "type": "Microsoft.Web/sites",
-      "name": ["doccano4azure"],
+      "name": "doccano4azure",
       "apiVersion": "2016-03-01",
       "location": "[resourceGroup().location]",
       "properties": {
-        "name": ["doccano4azure"],
+        "name": "doccano4azure",
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('servicePlanName'))]"
       },
       "dependsOn": [
@@ -56,7 +56,7 @@
           "properties": {
             "WEBSITES_PORT":8000 ,
             "DOCKER_CUSTOM_IMAGE_NAME": "abornst/doccano4azure",
-            "DOCKER_CUSTOM_IMAGE_RUN_COMMAND": "abornst/doccano4azure -e admin_user=[parameters('admin_user')] -e admin_pass=[parameters('admin_pass')]"
+            "DOCKER_CUSTOM_IMAGE_RUN_COMMAND": "abornst/doccano4azure -e admin_user=parameters('admin_user') -e admin_pass=parameters('admin_pass')"
           }
         }
       ]
