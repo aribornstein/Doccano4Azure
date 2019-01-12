@@ -2,6 +2,10 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {   
+    "appName": {
+      "defaultValue": "docanna",
+      "type": "string"
+    },
     "admin_user": {
       "defaultValue": "admin",
       "type": "string"
@@ -32,11 +36,11 @@
     },
     {
       "type": "Microsoft.Web/sites",
-      "name": "doccano4azure",
+      "name": "[parameters('appName')]",
       "apiVersion": "2016-03-01",
       "location": "[resourceGroup().location]",
       "properties": {
-        "name": "doccano4azure",
+        "name": "[parameters('appName')]",
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('servicePlanName'))]"
       },
       "dependsOn": [
@@ -48,7 +52,7 @@
           "type": "config",
           "apiVersion": "2016-03-01",
           "dependsOn": [
-            "[resourceId('Microsoft.Web/sites', doccano4azure)]"
+            "[resourceId('Microsoft.Web/sites', parameters('appName'))]"
           ],
           "tags": {
             "displayName": "appSettings"
@@ -62,4 +66,4 @@
       ]
     }
   ]
-} 
+}
