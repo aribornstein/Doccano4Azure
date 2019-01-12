@@ -20,10 +20,15 @@
         "apiVersion": "2016-03-01",
         "location": "[resourceGroup().location]",
         "sku": {
-          "name": "B1",
+          "name": "S1",
           "capacity": 1
         },
-        "kind": "linux"
+        "kind": "linux",
+        "properties": {
+          "workerSizeId": 0,
+          "reserved": true,
+          "hostingEnvironment": ""
+        }
       },
       {
         "type": "Microsoft.Web/sites",
@@ -49,7 +54,7 @@
               "displayName": "appSettings"
             },
             "properties": {
-              "WEBSITES_PORT":8000 ,
+              "WEBSITES_PORT":8000,
               "DOCKER_CUSTOM_IMAGE_NAME": "abornst/doccano4azure",
               "DOCKER_CUSTOM_IMAGE_RUN_COMMAND": "abornst/doccano4azure -e admin_user=[parameters('admin_user')] -e admin_pass=[parameters('admin_pass')]"
             }
